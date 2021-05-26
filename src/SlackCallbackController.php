@@ -9,10 +9,10 @@ class SlackCallbackController
 {
     public function handler(?array $data): array
     {
-        $log = new Logger('teste');
-        $log->pushHandler(new StreamHandler('meuarquivo.log', Logger::WARNING));
+        $logger = new Logger('teste');
+        $logger->pushHandler(new StreamHandler(__DIR__.'/my_app.log', Logger::DEBUG));
 
-        $log->info('data', $data ?? []);
+        $logger->info('TESTESTE', $data ?? []);
 
         return ['ok'];
     }
