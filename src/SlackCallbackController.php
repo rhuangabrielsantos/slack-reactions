@@ -6,9 +6,9 @@ class SlackCallbackController
 {
     public function handler(?array $data): array
     {
-        $arquivo = fopen(__DIR__ . '/meuarquivo.txt', 'w');
-        fwrite($arquivo, implode(PHP_EOL, $data ?? []));
-        fclose($arquivo);
+        echo "TESTE" . PHP_EOL;
+
+        print_r($data);
 
         return ['ok'];
     }
