@@ -12,7 +12,7 @@ class SlackCallbackController
         $log = new Logger('teste');
         $log->pushHandler(new StreamHandler('meuarquivo.log', Logger::WARNING));
 
-        $log->info('data', $data);
+        $log->info('data', $data ?? []);
 
         return ['ok'];
     }
