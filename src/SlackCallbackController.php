@@ -2,21 +2,21 @@
 
 namespace SlackReactions;
 
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
-
 class SlackCallbackController
 {
+    const FILE_PATH = __DIR__ . '/meuarquivo.json';
+
     public function handler(?array $data): array
     {
-        if (!is_file(__DIR__.'/my_app.log')) {
-            file_put_contents(__DIR__ . '/my_app.log', '');
+        $dataFile = [];
+
+        if (is_file(self::FILE_PATH)) {
+            $dataFile = json_decode(file_get_contents(self::FILE_PATH), true);
         }
 
-        $logger = new Logger('teste');
-        $logger->pushHandler(new StreamHandler(__DIR__.'/my_app.log', Logger::DEBUG));
+        $dataFile[] = $data;
 
-        $logger->info('TESTESTE', $data ?? []);
+        file_put_contents(self::FILE_PATH, json_encode($dataFile, JSON_PRETTY_PRINT));
 
         return ['ok'];
     }
