@@ -1,13 +1,31 @@
 version: '3.5'
 
 services:
-  php:
-    build:
-      context: ./docker/php/
-      dockerfile: Dockerfile
-    container_name: $PHP_CONTAINER_NAME
-    volumes:
-      - .:/var/www/html
+  app:
+    build: ./docker/php
+    container_name: app
+    restart: unless-stopped
+    tty: true
     environment:
       - COMPOSER_ALLOW_SUPERUSER=1
+    volumes:
+      - .:/var/www
+    networks:
+      - app-network
+
+  webserver:
+    image: nginx:latest
+    container_name: webserver
+    restart: unless-stopped
     tty: true
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

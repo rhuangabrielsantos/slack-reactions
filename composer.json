@@ -9,19 +9,22 @@
         }
     ],
     "scripts": {
-        "tests": "./vendor/bin/phpunit --colors tests"
+        "tests": "./vendor/bin/phpunit --colors tests",
+        "expose":  "/vendor/bin/expose ."
     },
     "require": {
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "rhuangabrielsantos/simple-routes": "^2.0",
+        "beyondcode/expose": "^1.5"
     },
     "autoload": {
         "psr-4": {
-            "BoilerplatePHP\\": "src/"
+            "SlackReactions\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "BoilerplateTests\\": "tests/"
+            "SlackReactionsTests\\": "tests/"
         }
     }
 }
