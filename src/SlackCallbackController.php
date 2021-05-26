@@ -4,7 +4,7 @@ namespace SlackReactions;
 
 class SlackCallbackController
 {
-    public function handler(array $data): array
+    public function handler(?array $data): array
     {
         $final = [];
 
