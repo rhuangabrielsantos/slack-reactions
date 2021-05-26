@@ -2,13 +2,17 @@
 
 namespace SlackReactions;
 
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+
 class SlackCallbackController
 {
     public function handler(?array $data): array
     {
-        echo "TESTE" . PHP_EOL;
+        $log = new Logger('teste');
+        $log->pushHandler(new StreamHandler('meuarquivo.log', Logger::WARNING));
 
-        print_r($data);
+        $log->info('data', $data);
 
         return ['ok'];
     }
